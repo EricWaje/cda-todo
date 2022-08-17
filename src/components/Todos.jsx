@@ -1,5 +1,6 @@
 import { Grid } from '@mui/material';
-import React, { useReducer } from 'react';
+import React, { useEffect, useReducer } from 'react';
+import { useParams } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
 import {
     ADD_TODO,
@@ -15,6 +16,8 @@ import ListTodo from './ListTodo';
 
 const Todos = () => {
     const [state, dispatch] = useReducer(todoReducer, initialState);
+
+    const { idTodos } = useParams();
 
     const handleTodo = (text) => {
         const newTodo = {
@@ -64,10 +67,15 @@ const Todos = () => {
         });
     };
 
+    useEffect(() => {
+        localStorage.setItem('tasks', JSON.stringify(state.tasks));
+    }, [state.tasks]);
+
     return (
-        <Grid container justifyContent="center" m={3}>
+        <Grid container m={3} justifyContent="center">
             <FormTodo handleTodo={handleTodo} deleteTodos={deleteTodos} />
             <ListTodo
+                idTodos={idTodos}
                 tasks={state.tasks}
                 deleteTodo={deleteTodo}
                 completeTodo={completeTodo}

@@ -8,7 +8,9 @@ import {
 } from '../actions/todoActions';
 
 export const initialState = {
-    tasks: [],
+    tasks: localStorage.getItem('tasks')
+        ? JSON.parse(localStorage.getItem('tasks'))
+        : [],
 };
 
 export const todoReducer = (state = initialState, action) => {
@@ -19,7 +21,7 @@ export const todoReducer = (state = initialState, action) => {
             };
         }
         case DELETE_TODO: {
-            console.log(action);
+            //console.log(action);
             const filteredTodos = state.tasks.filter(
                 (task) => task.id !== action.payload
             );
