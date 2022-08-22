@@ -1,5 +1,6 @@
 import { Grid } from '@mui/material';
 import React, { useEffect, useReducer } from 'react';
+import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
 import {
@@ -13,6 +14,7 @@ import {
 import { initialState, todoReducer } from '../reducers/todoReducer';
 import FormTodo from './FormTodo';
 import ListTodo from './ListTodo';
+import Navbar from './Navbar';
 
 const Todos = () => {
     const [state, dispatch] = useReducer(todoReducer, initialState);
@@ -72,7 +74,8 @@ const Todos = () => {
     }, [state.tasks]);
 
     return (
-        <Grid container m={3} justifyContent="center">
+        <Grid container justifyContent="center" direction="column">
+            <Navbar />
             <FormTodo handleTodo={handleTodo} deleteTodos={deleteTodos} />
             <ListTodo
                 idTodos={idTodos}

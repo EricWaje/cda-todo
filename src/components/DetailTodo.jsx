@@ -6,7 +6,6 @@ import FormEditTodo from './FormEditTodo';
 import { useSelector } from 'react-redux';
 
 const DetailTodo = ({ todo, deleteTodo, completeTodo, editTodo, saveTodo }) => {
-    const { user } = useSelector((state) => state.login);
     return (
         <Grid
             sx={{
@@ -28,7 +27,7 @@ const DetailTodo = ({ todo, deleteTodo, completeTodo, editTodo, saveTodo }) => {
             ) : (
                 <Typography variant="h5">{todo.title}</Typography>
             )}
-            <Typography>{user}</Typography>
+
             <Grid item justifyContent="space-between" sx={{ display: 'flex' }}>
                 <Button
                     onClick={() => deleteTodo(todo.id)}

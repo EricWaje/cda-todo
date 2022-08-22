@@ -1,9 +1,14 @@
-import { createStore, combineReducers } from 'redux';
-import { composeWithDevTools } from '@redux-devtools/extension';
-import { loginReducer } from './reducers/loginReducer';
+import { configureStore } from '@reduxjs/toolkit';
+import counterSlice from '../features/counter/counterSlice';
+import loginSlice from '../features/login/loginSlice';
+import productsSlice from '../features/products/productsSlice';
 
-export const RootReducers = combineReducers({
-    login: loginReducer,
+const store = configureStore({
+    reducer: {
+        contador: counterSlice,
+        login: loginSlice,
+        products: productsSlice,
+    },
 });
 
-export default createStore(RootReducers, composeWithDevTools());
+export default store;

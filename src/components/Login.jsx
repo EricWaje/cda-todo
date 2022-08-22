@@ -2,28 +2,22 @@ import React, { useReducer } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { HANDLE_USER } from '../actions/formLoginActions';
+import { login } from '../features/login/loginSlice';
 import { formLoginReducer, initialState } from '../reducers/formLoginReducer';
-import { LOGIN } from '../store/actions/loginActions';
+//import { LOGIN } from '../store/actions/loginActions';
 
 const Login = () => {
     const [loginState, loginDispatch] = useReducer(
         formLoginReducer,
         initialState
     );
-    const dispatch = useDispatch(); //--> enviar informacion a mi estado a traves de una acción
-    //const prueba = useSelector((state) => state); --> leo mi estado
-
-    //console.log('estado global de nuestra app', prueba.login.pasword);
-
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        dispatch({
-            type: LOGIN,
-            user: loginState.user,
-            password: loginState.password,
-        });
+        //console.log(loginState);
+        dispatch(login(loginState));
         navigate('/todos');
     };
 
